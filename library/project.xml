@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 2001 - 2005 ivata limited.
+// All rights reserved.
+// =========================================================
+// ivata groupware may be redistributed under the GNU General Public
+// License as published by the Free Software Foundation;
+// version 2 of the License.
+//
+// These programs are free software; you can redistribute them and/or
+// modify them under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2 of the License.
+//
+// These programs are distributed in the hope that they will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// See the GNU General Public License in the file LICENSE.txt for more
+// details.
+//
+// If you would like a copy of the GNU General Public License write to
+//
+// Free Software Foundation, Inc.
+// 59 Temple Place - Suite 330
+// Boston, MA 02111-1307, USA.
+//
+//
+// To arrange commercial support and licensing, contact ivata at
+//                  http://www.ivata.com/contact.jsp
+//
+////////////////////////////////////////////////////////////////////////////////
+//
+// $Log: project.xml,v $
+// Revision 1.2  2005/04/09 17:19:42  colinmacleod
+// Changed copyright text to GPL v2 explicitly.
+//
+// Revision 1.1.1.1  2005/03/10 17:51:50  colinmacleod
+// Restructured ivata op around Hibernate/PicoContainer.
+// Renamed ivata groupware.
+//
+// Revision 1.12  2004/09/30 14:59:05  colinmacleod
+// Added methods to sanitize the entire library and update the search index.
+//
+// Revision 1.11  2004/08/01 12:17:02  colinmacleod
+// Fixed project dependencies.
+//
+// Revision 1.10  2004/08/01 11:53:48  colinmacleod
+// Restructured search engine into separate subproject.
+//
+// Revision 1.9  2004/03/26 21:36:26  colinmacleod
+// Shortened name to ivataop.
+//
+// Revision 1.8  2004/03/21 21:16:28  colinmacleod
+// Shortened name to ivata op.
+//
+// Revision 1.7  2004/03/21 20:28:54  colinmacleod
+// Now references current pom version.
+//
+// Revision 1.6  2004/03/07 22:57:43  colinmacleod
+// Fixed eclipse project generation.
+//
+// Revision 1.5  2004/03/03 21:43:52  colinmacleod
+// Restructured projects around ejb, jar and war artifacts.
+//
+// Revision 1.4  2004/02/02 22:39:10  colinmacleod
+// Added copyright notice
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+
+<project>
+  <extend>${basedir}/../project.xml</extend>
+  <pomVersion>3</pomVersion>
+  <id>ivatagroupware-library</id>
+  <groupId>ivatagroupware</groupId>
+  <name>ivata groupware library</name>
+
+  <shortDescription>Content Management Features for ivata op.</shortDescription>
+
+  <description>
+    <![CDATA[
+        <p>
+            The library is a place where users can submit articles and notes,
+            attach files and search for the information again afterwards.
+        </p>
+    ]]>
+  </description>
+  <dependencies>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-addressbook-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-core-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-htmlparser-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-search-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-security-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-webmail-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+    </dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>
+      ${basedir}/src/java
+    </sourceDirectory>
+    <resources>
+      <resource>
+        <directory>
+          ${basedir}/src/conf
+        </directory>
+      </resource>
+    </resources>
+  </build>
+</project>
+

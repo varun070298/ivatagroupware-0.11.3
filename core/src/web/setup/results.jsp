@@ -1,0 +1,106 @@
+<%@page contentType='text/html;charset=UTF-8'%>
+
+<%@page import="com.ivata.groupware.admin.setting.Settings" %>
+
+<%@page import="com.ivata.mask.util.StringHandling"%>
+<%@page import="com.ivata.mask.web.tag.theme.ThemeTag"%>
+<%@page import="java.util.*"%>
+<%@page import="javax.servlet.http.*"%>
+
+<%@page import='org.apache.struts.Globals' %>
+
+<%--
+////////////////////////////////////////////////////////////////////////////////
+// $Id: results.jsp,v 1.2 2005/04/22 09:43:59 colinmacleod Exp $
+//
+// Displays the results of the setup process.
+//
+// Since: ivata groupware 0.11 (2005-03-29)
+// Author: Colin MacLeod <colin.macleod@ivata.com>
+// $Revision: 1.2 $
+//
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 2001 - 2005 ivata limited.
+// All rights reserved.
+// =========================================================
+// ivata groupware may be redistributed under the GNU General Public
+// License as published by the Free Software Foundation;
+// version 2 of the License.
+//
+// These programs are free software; you can redistribute them and/or
+// modify them under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2 of the License.
+//
+// These programs are distributed in the hope that they will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// See the GNU General Public License in the file LICENSE.txt for more
+// details.
+//
+// If you would like a copy of the GNU General Public License write to
+//
+// Free Software Foundation, Inc.
+// 59 Temple Place - Suite 330
+// Boston, MA 02111-1307, USA.
+//
+//
+// To arrange commercial support and licensing, contact ivata at
+//                  http://www.ivata.com/contact.jsp
+//
+////////////////////////////////////////////////////////////////////////////////
+//
+// $Log: results.jsp,v $
+// Revision 1.2  2005/04/22 09:43:59  colinmacleod
+// Fixed mail setup form path.
+//
+// Revision 1.1  2005/04/11 10:40:41  colinmacleod
+// Added setup feature.
+//
+////////////////////////////////////////////////////////////////////////////////
+--%>
+
+<%@include file='/include/tags.jspf'%>
+<logic:notPresent name='securitySession'>
+  <logic:redirect action='/setup'/>
+</logic:notPresent>
+<logic:notPresent name='setupForm'>
+  <logic:redirect action='/setup'/>
+</logic:notPresent>
+<jsp:include page="/generateCSS"/>
+<c:catch>
+  <%@include file='/include/theme.jspf'%>
+</c:catch>
+
+<igw:getSetting id='siteName' setting='siteName' type='java.lang.String'/>
+<igw:bean id='setupForm' name='setupForm' scope='request' type='com.ivata.groupware.business.mail.struts.MailSetupForm'/>
+
+<%-- if we're in pop-up mode, don't show a title --%>
+<igw:bean id='title' type='java.lang.String'><bean:message key='setup.title.results'/></igw:bean>
+<imhtml:html locale='true'>
+  <igw:head title='<%=title%>' login='true' topLevel='true'>
+    <link rel='stylesheet' href='<%=request.getContextPath()%>/style/login.css' type='text/css' />
+    <html:base/>
+  </igw:head>
+  <body>
+    <imtheme:window
+        styleClass='loginWindow'
+        titleKey='setup.title.results.window'
+        titleArgs='<%=Arrays.asList(new Object[] {siteName})%>'>
+      <%@include file='/include/errorFrame.jspf'%>
+      <imhtml:form
+          action='/loginGuest'
+          resourceFieldPath='setup'>
+        <imtheme:frame>
+          <imtheme:framePane>
+            <bean:message key="setup.label.results" arg0='<%=siteName%>'/>
+          </imtheme:framePane>
+        </imtheme:frame>
+        <imtheme:buttonFrame>
+          <imhtml:ok/>
+        </imtheme:buttonFrame>
+      </imhtml:form>
+    </imtheme:window>
+    <%@ include file='/theme/include/standards.jspf' %>
+  </body>
+</imhtml:html>

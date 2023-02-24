@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 2001 - 2005 ivata limited.
+// All rights reserved.
+// =========================================================
+// ivata groupware may be redistributed under the GNU General Public
+// License as published by the Free Software Foundation;
+// version 2 of the License.
+//
+// These programs are free software; you can redistribute them and/or
+// modify them under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2 of the License.
+//
+// These programs are distributed in the hope that they will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// See the GNU General Public License in the file LICENSE.txt for more
+// details.
+//
+// If you would like a copy of the GNU General Public License write to
+//
+// Free Software Foundation, Inc.
+// 59 Temple Place - Suite 330
+// Boston, MA 02111-1307, USA.
+//
+//
+// To arrange commercial support and licensing, contact ivata at
+//                  http://www.ivata.com/contact.jsp
+//
+////////////////////////////////////////////////////////////////////////////////
+//
+// $Log: project.xml,v $
+// Revision 1.4.2.1  2005/10/08 17:30:23  colinmacleod
+// Added conf dir.
+//
+// Revision 1.4  2005/04/10 20:37:41  colinmacleod
+// Added dependency on startdb subproject.
+//
+// Revision 1.3  2005/04/09 17:19:53  colinmacleod
+// Changed copyright text to GPL v2 explicitly.
+//
+// Revision 1.2  2005/03/22 18:56:53  colinmacleod
+// Expanded contents of ivatagroupware-hibernate.
+//
+// Revision 1.1.1.1  2005/03/10 17:49:20  colinmacleod
+// Restructured ivata op around Hibernate/PicoContainer.
+// Renamed ivata groupware.
+//
+// Revision 1.16  2004/12/23 20:53:01  colinmacleod
+// Updated Struts to version 1.2.4.
+//
+// Revision 1.15  2004/10/07 16:48:19  colinmacleod
+// Added security subproject.
+//
+// Revision 1.14  2004/07/18 22:02:19  colinmacleod
+// Added missing dependencies.
+//
+// Revision 1.13  2004/07/17 16:11:39  colinmacleod
+// Added jar subproject to each of the main modules. This prevents us from having to build EJB descriptors for non-EJB projects.
+//
+// Revision 1.12  2004/07/13 19:48:10  colinmacleod
+// Moved project to POJOs from EJBs.
+// Applied PicoContainer to services layer (replacing session EJBs).
+// Applied Hibernate to persistence layer (replacing entity EJBs).
+//
+// Revision 1.11  2004/03/26 21:36:26  colinmacleod
+// Shortened name to ivataop.
+//
+// Revision 1.10  2004/03/21 21:16:34  colinmacleod
+// Shortened name to ivata op.
+//
+// Revision 1.9  2004/03/21 20:28:55  colinmacleod
+// Now references current pom version.
+//
+// Revision 1.8  2004/03/10 22:41:55  colinmacleod
+// Cosmetic changes.
+//
+// Revision 1.7  2004/03/03 22:36:41  colinmacleod
+// Restructured projects around ejb, jar and war artifacts.
+//
+// Revision 1.6  2004/02/04 23:38:17  colinmacleod
+// Added missing dependencies.
+//
+// Revision 1.5  2004/02/04 15:28:06  janboros
+// including dependencies
+//
+// Revision 1.4  2004/02/03 15:39:13  janboros
+// adding dependencies from openportal to war project
+//
+// Revision 1.3  2004/02/02 21:03:18  colinmacleod
+// Added copyright notice.
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+
+<project>
+  <extend>${basedir}/../../project.xml</extend>
+  <pomVersion>3</pomVersion>
+  <id>ivatagroupware-war</id>
+  <groupId>ivatagroupware</groupId>
+  <name>ivata groupware WAR</name>
+
+  <shortDescription>Creates the ivata groupware WAR file.</shortDescription>
+
+  <description>
+    <![CDATA[
+    <p>
+      This project builds the ivata groupware WAR file.
+    </p>
+    ]]>
+  </description>
+
+  <!--
+      PLEASE KEEP DEPENDENCIES ORDERED ALPHABETICALLY - FIRST BY groupId THEN
+      BY artifactId. THIS MAKES THEM EASIER TO FIND LATER - THANKS
+  -->
+  <dependencies>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-addressbook-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-calendar-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-core-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-hibernate</artifactId>
+      <version>${pom.currentVersion}</version>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-htmlparser-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-library-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-mask-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-search-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-security-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-startdb</artifactId>
+      <version>${pom.currentVersion}</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+    <dependency>
+      <groupId>ivatagroupware</groupId>
+      <artifactId>ivatagroupware-webmail-jar</artifactId>
+      <version>${pom.currentVersion}</version>
+      <properties>
+        <war.bundle>true</war.bundle>
+      </properties>
+    </dependency>
+  </dependencies>
+  <build>
+    <resources>
+      <resource>
+        <directory>
+          ${basedir}/src/conf
+        </directory>
+      </resource>
+      <resource>
+        <directory>
+          ${basedir}/src/groovy
+        </directory>
+      </resource>
+    </resources>
+  </build>
+</project>
+

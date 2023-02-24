@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+// Copyright (c) 2001 - 2005 ivata limited.
+// All rights reserved.
+// =========================================================
+// ivata groupware may be redistributed under the GNU General Public
+// License as published by the Free Software Foundation;
+// version 2 of the License.
+//
+// These programs are free software; you can redistribute them and/or
+// modify them under the terms of the GNU General Public License
+// as published by the Free Software Foundation; version 2 of the License.
+//
+// These programs are distributed in the hope that they will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+//
+// See the GNU General Public License in the file LICENSE.txt for more
+// details.
+//
+// If you would like a copy of the GNU General Public License write to
+//
+// Free Software Foundation, Inc.
+// 59 Temple Place - Suite 330
+// Boston, MA 02111-1307, USA.
+//
+//
+// To arrange commercial support and licensing, contact ivata at
+//                  http://www.ivata.com/contact.jsp
+//
+////////////////////////////////////////////////////////////////////////////////
+//
+// $Log: maven.xml,v $
+// Revision 1.3  2005/05/01 08:51:54  colinmacleod
+// Added delimiter to hibernate export
+// so commented it out here.
+//
+// Revision 1.2  2005/04/29 02:48:19  colinmacleod
+// Data bugfixes.
+// Changed primary key back to Integer.
+//
+// Revision 1.1  2005/04/11 10:25:08  colinmacleod
+// First version of startdb.
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+
+<project
+    xmlns:ant="jelly:ant"
+    default="jar:install">
+  <preGoal name="java:compile">
+    <!-- clear any previous target -->
+    <ant:delete
+      dir="${maven.build.dir}/igwstart"/>
+    <ant:delete
+      dir="${maven.build.dir}/sql"/>
+    <ant:mkdir dir="${maven.build.dir}/igwstart/db"/>
+    <ant:mkdir dir="${maven.build.dir}/sql"/>
+    <!--
+      execute the schema create sql: NOTE: this is from Hibernate
+      (run the generateCurrent.sh script to update it)
+    -->
+    <ant:copy
+        file="${basedir}/../install/src/db/hypersonic/schema-current.sql"
+        tofile="${maven.build.dir}/sql/schema-current.sql"/>
+    <!-- get rid of alter and drop lines -->
+    <ant:replace
+        file="${maven.build.dir}/sql/schema-current.sql"
+        token="alter"
+        value="-- alter"/>
+    <ant:replace
+        file="${maven.build.dir}/sql/schema-current.sql"
+        token="drop"
+        value="-- drop"/>
+    <ant:replace
+        file="${maven.build.dir}/sql/schema-current.sql"
+        token="add constraint"
+        value="-- add constraint"/>
+<!--    <ant:replace
+        file="${maven.build.dir}/sql/schema-current.sql"
+        token="create "
+        value="; create "/>-->
+    <ant:sql
+        driver="org.hsqldb.jdbcDriver"
+        url="jdbc:hsqldb:file:${maven.build.dir}/igwstart/db/igwstart"
+        classpath="${maven.repo.local}/hsqldb/jars/hsqldb-1.7.3.0.jar"
+        userid="sa"
+        password=""
+        src="${maven.build.dir}/sql/schema-current.sql"/>
+
+    <!-- execute the data sql -->
+    <ant:copy
+        file="${basedir}/../install/src/db/hypersonic/data-current.sql"
+        tofile="${maven.build.dir}/sql/data-current.sql"/>
+    <ant:sql
+        driver="org.hsqldb.jdbcDriver"
+        url="jdbc:hsqldb:file:${maven.build.dir}/igwstart/db/igwstart"
+        classpath="${maven.repo.local}/hsqldb/jars/hsqldb-1.7.3.0.jar"
+        userid="sa"
+        password=""
+        src="${maven.build.dir}/sql/data-current.sql"/>
+    <ant:concat
+        destfile="${maven.build.dir}/sql/shutdown.sql">SHUTDOWN;</ant:concat>
+    <ant:sql
+        driver="org.hsqldb.jdbcDriver"
+        url="jdbc:hsqldb:file:${maven.build.dir}/igwstart/db/igwstart"
+        classpath="${maven.repo.local}/hsqldb/jars/hsqldb-1.7.3.0.jar"
+        userid="sa"
+        password=""
+        src="${maven.build.dir}/sql/shutdown.sql"/>
+  </preGoal>
+</project>
+
